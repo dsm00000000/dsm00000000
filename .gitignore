@@ -1,0 +1,69 @@
+# SSOT: .gitignore (canonical) — keep current large files already tracked, ignore future ones
+
+# --- Python / venv / caches ---
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+.eggs/
+dist/
+build/
+pip-wheel-metadata/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+.venv/
+venv/
+ENV/
+env/
+
+# --- OS / editor ---
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# --- Secrets / local ---
+.env
+.env.*
+*.key
+*.pem
+*.p12
+*.pfx
+
+# --- Repo-specific artifacts ---
+_prompt.md
+.backups/
+.deploy/
+.pdfs/
+.repositorier/
+.restore/
+.vault/
+
+# --- Media (do not add new) ---
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webp
+
+# --- Large docs / archives (do not add new) ---
+*.pdf
+*.PDF
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.7z
+*.rar
+
+# --- Optional: keep encrypted artifacts tracked only when explicitly added ---
+# (leave commented to allow qr.pdf.gpg to remain tracked and permit future adds if you really want)
+# *.gpg
+
+# --- Git internals (never) ---
+.git/
