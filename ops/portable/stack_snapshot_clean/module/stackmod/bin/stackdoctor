@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+for c in bash git tar openssl grep find; do
+  command -v "$c" >/dev/null 2>&1 && echo "OK $c" || echo "MISS $c"
+done

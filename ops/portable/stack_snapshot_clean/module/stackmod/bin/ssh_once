@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+if ssh-add -l >/dev/null 2>&1; then
+  echo "SSH key already loaded"
+  exit 0
+fi
+SSH_KEY="${SSH_KEY:-$HOME/.ssh/id_ed25519}"
+[ -f "$SSH_KEY" ] || SSH_KEY="$HOME/.ssh/id_rsa"
+[ -f "$SSH_KEY" ] || { echo "No SSH key found" >&2; exit 1; }
+eval "$(ssh-agent -s)" >/dev/null
+ssh-add "$SSH_KEY" >/dev/null
+echo "SSH key loaded"

@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+ROOT="$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)"
+"$ROOT/bin/stackctl" ssh_once || true
+"$ROOT/bin/stackctl" safe
+"$ROOT/bin/stackctl" sync
+"$ROOT/bin/stackctl" secrets_encrypt
+"$ROOT/bin/stackctl" backup
+"$ROOT/bin/stackctl" promptpack
+"$ROOT/bin/stackctl" md2pdf

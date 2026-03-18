@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+IN="${1:?usage: snapshot_decrypt file.tar.gz.enc [out.tar.gz]}"
+OUT="${2:-${IN%.enc}}"
+
+if [ -n "${STACK_SNAPSHOT_PASS:-}" ]; then
+  openssl enc -d -aes-256-cbc -pbkdf2 -in "$IN" -out "$OUT" -pass env:STACK_SNAPSHOT_PASS
+  echo "$OUT"
+  exit 0
+fi
+
+if [ -n "${STACK_CRYPTO_PASS:-}" ]; then
+  openssl enc -d -aes-256-cbc -pbkdf2 -in "$IN" -out "$OUT" -pass env:STACK_CRYPTO_PASS
+  echo "$OUT"
+  exit 0
+fi
+
+echo "Missing STACK_SNAPSHOT_PASS or STACK_CRYPTO_PASS" >&2
+exit 1
