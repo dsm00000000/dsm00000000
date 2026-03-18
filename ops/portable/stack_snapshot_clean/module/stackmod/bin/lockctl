@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+LOCKDIR="${XDG_RUNTIME_DIR:-/tmp}/stackmod-locks"
+mkdir -p "$LOCKDIR"
+NAME="${1:-default}"
+FILE="$LOCKDIR/${NAME}.lock"
+exec 9>"$FILE"
+if flock -n 9; then
+  echo "LOCKED $FILE"
+  exit 0
+else
+  echo "BUSY $FILE" >&2
+  exit 1
+fi

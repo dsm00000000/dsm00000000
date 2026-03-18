@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+TARGET="${1:-$HOME}"
+OUTDIR="${2:-$HOME/Documents/dsmjpa/stack/var/backups}"
+mkdir -p "$OUTDIR"
+TS="$(date -u +%Y%m%dT%H%M%SZ)"
+BASE="$(basename "$TARGET")"
+TAR="${OUTDIR}/${TS}__${BASE}.tar.gz"
+ENC="${TAR}.enc"
+
+tar -C "$(dirname "$TARGET")" -czf "$TAR" "$(basename "$TARGET")"
+
+if [ -n "${STACK_SNAPSHOT_PASS:-}" ]; then
+  openssl enc -aes-256-cbc -pbkdf2 -salt -in "$TAR" -out "$ENC" -pass env:STACK_SNAPSHOT_PASS
+  rm -f "$TAR"
+  echo "$ENC"
+  exit 0
+fi
+
+if [ -n "${STACK_CRYPTO_PASS:-}" ]; then
+  openssl enc -aes-256-cbc -pbkdf2 -salt -in "$TAR" -out "$ENC" -pass env:STACK_CRYPTO_PASS
+  rm -f "$TAR"
+  echo "$ENC"
+  exit 0
+fi
+
+echo "$TAR"
