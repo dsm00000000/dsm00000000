@@ -1,34 +1,20 @@
-# stack
+# stack_snapshot_clean
 
-`stack` está retirado del flujo diario.
+Snapshot portátil congelado del runtime compartido ya absorbido.
 
-No es un centro operativo activo.
-Se conserva solo como repo mínimo para:
-
-- exponer wrappers públicos en `bin/`
-- mantener `module/stackmod` como subtree portable
-- conservar el contrato final del estado retirado
-
-## Repos operativos reales
-
+## Set final de repos operativos
 - `dsm00000000`
-- `REMOVED_FROM_FINAL_SET`
 - `trader`
 - `defier`
+- `marketer`
 
-## Entrada pública
-
-- `bin/stackdoctor`
-- `bin/stackctl repos ls`
-- `bin/stackall`
-- `bin/stacktree`
-- `run.sh`
+## Estado
+- no existe repo `stack` activo
+- este árbol se conserva como snapshot portable congelado
+- la implementación compartida vive en `module/stackmod`
+- los wrappers locales del repo viven en `ops/bin/`
 
 ## Regla
-
-- no añadir nuevas features aquí
-- no usar `stack/` como mando diario
-- no reabrir crecimiento estructural
-- cualquier primitiva compartida real vive en `module/stackmod`
-
-Ver `contracts/final_state.md`.
+- no usar este snapshot como centro operativo externo
+- no reintroducir repos fuera del set final
+- cualquier ajuste compartido debe quedar consistente entre `ops/shared/stack_runtime` y este snapshot

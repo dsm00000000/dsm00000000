@@ -1,36 +1,23 @@
 # final_state
 
-## Estado de `stack`
+## Estado
 
-`stack` queda retirado del flujo diario y congelado como repositorio mínimo.
+La absorción de `stack` quedó cerrada.
+No existe repo `stack` activo.
 
-## Qué conserva
-
+## Qué conserva este snapshot
 - wrappers públicos mínimos en `bin/`
-- `module/stackmod` como subtree portable
+- `module/stackmod` como implementación portable compartida
 - marcadores de retiro y estabilidad
-- listado de roots/repos
+- roots/repos del set final
 
-## Qué no conserva
-
-- gobierno operativo diario
-- documentación duplicada
-- wrappers paralelos innecesarios
-- onechunkers históricos
-- artefactos operativos versionados
-
-## Repos operativos reales
-
+## Set final
 - `dsm00000000`
-- `REMOVED_FROM_FINAL_SET`
 - `trader`
 - `defier`
+- `marketer`
 
 ## Regla estructural
-
-- una sola capa pública: `bin/`
-- una sola implementación portable real: `module/stackmod`
-- documentación central mínima:
-  - `README.md`
-  - `contracts/final_state.md`
-  - `module/stackmod/contracts/portable_contract.md`
+- una sola capa pública local: `ops/bin/`
+- una implementación compartida absorbida: `ops/shared/stack_runtime`
+- un snapshot portable congelado: `ops/portable/stack_snapshot_clean`
