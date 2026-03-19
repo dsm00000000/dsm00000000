@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 set -Eeuo pipefail
 . "$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)/_common.sh"
-repo_path_from_name "${1:-}"
+repo_path_from_name "${1:-self}"

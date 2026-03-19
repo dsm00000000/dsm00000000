@@ -3,8 +3,7 @@ set -Eeuo pipefail
 . "$(CDPATH= cd -- "$(dirname -- "$0")/../../bin" && pwd)/_common.sh"
 
 sync_one() {
-  local repo="$1"
-  local rp
+  local repo="$1" rp
   rp="$(repo_path_from_name "$repo")"
   [ -d "$rp/.git" ] || { log "SKIP no git repo: $repo"; return 0; }
   (
@@ -14,9 +13,8 @@ sync_one() {
       git commit -m "sync: ${repo} $(date -u +%Y-%m-%dT%H:%M:%SZ)" || true
     fi
     git push origin HEAD || true
-    if git remote get-url gitlab >/dev/null 2>&1; then
-      git push gitlab HEAD || true
-    fi
+    git remote get-url gl >/dev/null 2>&1 && git push gl HEAD || true
+    git remote get-url gitlab >/dev/null 2>&1 && git push gitlab HEAD || true
   )
 }
 

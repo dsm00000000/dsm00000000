@@ -2,6 +2,7 @@
 set -Eeuo pipefail
 . "$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)/_common.sh"
 
+STACKMOD_ROOT="$(stackmod_root_from_script)"
 cmd="${1:-}"
 sub="${2:-}"
 
@@ -9,11 +10,11 @@ case "$cmd:$sub" in
   repos:ls)
     while IFS= read -r repo; do
       [ -n "$repo" ] || continue
-      printf '%-12s %s\n' "$repo" "$(repo_path_from_name "$repo")"
+      printf "%-12s %s\n" "$repo" "$(repo_path_from_name "$repo")"
     done < <(repo_names)
     ;;
   safe:)
-    run_in_repo stack "$STACKMOD_ROOT/ops/bin/security_audit_all.sh"
+    "$STACKMOD_ROOT/ops/bin/security_audit_all.sh"
     ;;
   sync:)
     "$STACKMOD_ROOT/ops/bin/git_sync_all.sh"

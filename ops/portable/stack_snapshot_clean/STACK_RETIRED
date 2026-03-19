@@ -1,4 +1,4 @@
-RETIRED_AT=20260313T182823Z
-STATUS=daily_flow_retired
-ROLE=minimal_module_repo
-OPERATIVE_REPOS=dsm00000000,freelancer,trader,defier
+RETIRED_AT=20260319T173523Z
+STATUS=absorbed_and_retired
+ROLE=frozen_portable_snapshot
+OPERATIVE_REPOS=dsm00000000,trader,defier,marketer
