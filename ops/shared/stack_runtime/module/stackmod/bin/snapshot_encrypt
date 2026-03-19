@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+case "$SCRIPT_DIR" in
+  */ops/shared/stack_runtime/bin) REPO_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)" ;;
+  */ops/portable/stack_snapshot_clean/module/stackmod/bin) REPO_ROOT="$(cd "$SCRIPT_DIR/../../../../.." && pwd)" ;;
+  *) REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)" ;;
+esac
+SRC="${1:-$REPO_ROOT}"
+OUTDIR="${2:-$REPO_ROOT/var/backups}"
+mkdir -p "$OUTDIR"
+TS="$(date -u +%Y%m%dT%H%M%SZ)"
+OUT="$OUTDIR/snapshot_${TS}.tar.gz"
+tar -C "$(dirname "$SRC")" -czf "$OUT" "$(basename "$SRC")"
+printf "%s\n" "$OUT"
