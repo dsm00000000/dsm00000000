@@ -22,7 +22,7 @@
 ## Repos operativos reales
 
 - `dsm00000000`
-- `freelancer`
+- `REMOVED_FROM_FINAL_SET`
 - `trader`
 - `defier`
 
